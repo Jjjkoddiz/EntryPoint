@@ -1,0 +1,15 @@
+<nav class="menuBar">
+  <div>
+    <%= link_to "Главная", root_path %>
+    <%= link_to "Стажировки", internships_path %>
+    <%= link_to "О проекте", about_path %>
+  </div>
+
+  <div>
+    <% if user_signed_in? %>
+      <%= link_to "Профиль", profile_path %>
+    <% else %>
+      <%= link_to "Войти", new_user_session_path %>
+    <% end %>
+  </div>
+</nav>

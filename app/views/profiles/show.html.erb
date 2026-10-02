@@ -1,0 +1,22 @@
+<h1>Профиль</h1>
+
+<div class="profile-actions">
+  <%= link_to "Настройки аккаунта", edit_user_registration_path %>
+  <%= button_to "Выйти", destroy_user_session_path, method: :delete, class: "logout-btn" %>
+</div>
+
+<hr>
+
+<h2>Сохранённые стажировки</h2>
+
+<% if @internships.any? %>
+  <% @internships.each do |internship| %>
+    <div class="internship-card">
+      <h3><%= internship.title %></h3>
+      <p><%= internship.company.name %></p>
+      <%= link_to "Открыть", internship_path(internship) %>
+    </div>
+  <% end %>
+<% else %>
+  <p>Пока ничего не сохранено. Загляни в <%= link_to "стажировки", internships_path %>.</p>
+<% end %>

@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @internship %>
+
+<div>
+  <%= link_to "Назад к стажировкам", internships_path %>
+  <% if user_signed_in? %>
+  <% if current_user.internships.include?(@internship) %>
+    <p>Уже в трекере</p>
+  <% else %>
+    <%= form_with url: favorites_path, method: :post do |form| %>
+      <%= form.hidden_field :internship_id, value: @internship.id %>
+      <%= form.submit "Добавить в трекер" %>
+    <% end %>
+  <% end %>
+<% end %>
+</div>

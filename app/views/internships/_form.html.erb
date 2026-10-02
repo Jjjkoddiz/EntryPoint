@@ -1,0 +1,57 @@
+<%= form_with(model: internship) do |form| %>
+  <% if internship.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(internship.errors.count, "error") %> prohibited this internship from being saved:</h2>
+
+      <ul>
+        <% internship.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :company_id, style: "display: block" %>
+    <%= form.text_field :company_id %>
+  </div>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.textarea :description %>
+  </div>
+
+  <div>
+    <%= form.label :location, style: "display: block" %>
+    <%= form.text_field :location %>
+  </div>
+
+  <div>
+    <%= form.label :format, style: "display: block" %>
+    <%= form.text_field :format %>
+  </div>
+
+  <div>
+    <%= form.label :salary, style: "display: block" %>
+    <%= form.text_field :salary %>
+  </div>
+
+  <div>
+    <%= form.label :deadline, style: "display: block" %>
+    <%= form.date_field :deadline %>
+  </div>
+
+  <div>
+    <%= form.label :source_url, style: "display: block" %>
+    <%= form.text_field :source_url %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
