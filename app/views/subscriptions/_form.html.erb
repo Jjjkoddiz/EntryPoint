@@ -1,0 +1,58 @@
+<div id="new_subscription">
+  <%= form_with(model: Subscription.new, class: "growy-subscribe-form", id: "subscription-form") do |form| %>
+    
+    <%= form.label :email, "Ваш email", class: "visually-hidden" %>
+    
+    <%= form.email_field :email, 
+        class: "h4", 
+        placeholder: "Введите email", 
+        autocomplete: "email", 
+        required: true %>
+
+    <button type="button" class="h4" onclick="document.getElementById('consent-modal').showModal()">
+      Подписаться
+    </button>
+    
+  <% end %>
+
+  <dialog id="consent-modal" class="consent-dialog">
+    <div class="consent-content">
+      <h2>Привет!</h2>
+      <p>Нам надо соблюсти небольшую формальность, подтверди, пожалуйста, свои согласия:</p>
+      
+      <label class="consent-label">
+        <input type="checkbox" id="check-pd" onchange="toggleConsentButton()">
+        <span>Даю согласие на <u>обработку и передачу</u> персональных данных на условиях <a href="/privacy" target="_blank">Политики конфиденциальности</a></span>
+      </label>
+
+      <label class="consent-label">
+        <input type="checkbox" id="check-news" onchange="toggleConsentButton()">
+        <span>Принимаю условия <a href="/terms" target="_blank">Публичной оферты</a> и даю согласие на получение информационных сообщений</span>
+      </label>
+
+      
+      <div id="error" style="color: #d32f2f; font-size: 14px; margin-bottom: 10px;"></div>
+
+      <button type="submit" form="subscription-form" id="consent-submit" class="consent-save-btn" disabled>
+        Сохранить
+      </button>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  function toggleConsentButton() {
+    const checkPd = document.getElementById('check-pd').checked;
+    const checkNews = document.getElementById('check-news').checked;
+    const submitBtn = document.getElementById('consent-submit');
+    submitBtn.disabled = !(checkPd && checkNews);
+  }
+
+  
+  document.addEventListener('turbo:before-stream-render', () => {
+    const dialog = document.getElementById('consent-modal');
+    if (dialog) {
+      dialog.close(); 
+    }
+  });
+</script>

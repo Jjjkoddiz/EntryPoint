@@ -1,0 +1,25 @@
+<h1>Профиль</h1>
+
+<div class="profile-actions">
+  <%# Ссылку на настройки убрали, так как :registerable выключен %>
+  
+  <%= button_to "Выйти", destroy_user_session_path, method: :delete, class: "logout-btn" %>
+</div>
+
+<hr>
+
+<h2>Сохранённые стажировки</h2>
+
+<% if @internships.any? %>
+  <% @internships.each do |internship| %>
+    <div class="internship-card">
+      <h3><%= internship.title %></h3>
+      <p><%= internship.company.name %></p>
+      <%# Добавили admin_ к пути стажировки %>
+      <%= link_to "Открыть", admin_internship_path(internship) %>
+    </div>
+  <% end %>
+<% else %>
+  <%# Добавили admin_ к общему пути стажировок %>
+  <p>Пока ничего не сохранено. Загляни в <%= link_to "стажировки", admin_internships_path %>.</p>
+<% end %>

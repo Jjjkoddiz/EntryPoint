@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
-  get "profile", to: "profiles#show"
-  # get "profiles/show"
+  resources :subscriptions, only: :create
+
+  namespace :admin do
+    resources :subscriptions, only: :index
+
+    get "home/index"
+    resources :favorites
+    resources :internships
+    resources :companies
+    get "profile", to: "profiles#show"
+  end
+
   get "about", to: "pages#about"
-  resources :favorites
-  resources :internships
-  resources :companies
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

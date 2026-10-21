@@ -5,6 +5,7 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user
+    return unless user.present? && user.admin?
 
     # Public content
     can :read, Internship

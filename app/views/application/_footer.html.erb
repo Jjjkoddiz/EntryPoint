@@ -1,0 +1,18 @@
+<footer class="growy-footer">
+  <%= link_to root_path, class: "growy-logo growy-logo-footer" do %>
+    <%= image_tag "home/growy-logo-footer.webp", alt: "GROWY" %>
+  <% end %>
+
+  <div class="growy-footer-bottom">
+    <p class="growy-footer-contact">
+      Если есть вопросы, идеи или вы хотите принять участие
+      <br class="desktop-break">
+      в раннем доступе — напишите нам
+      <%= mail_to "GROWY@mail.ru", "GROWY@mail.ru" %>
+    </p>
+
+    <p class="growy-footer-copyright">
+      © 2026 GROWY
+    </p>
+  </div>
+</footer>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Entry Point" %></title>
+    <title>Growy</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Entry Point">
@@ -24,7 +24,18 @@
   </head>
 
   <body>
-    <%= render "menubar" %>
-    <%= yield %>
+    <div class="growy-page">
+    <div class="growy-container">
+      
+      <% if current_user && current_user.admin? %>
+        <%= render "application/admin_menubar" %>
+      <% else %>
+        <%= render "application/menubar" %>
+      <% end %>
+
+      <%= yield %>
+      <%= render "application/footer" %>
+    </div>
+  </div>
   </body>
 </html>

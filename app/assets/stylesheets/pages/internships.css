@@ -1,0 +1,65 @@
+/* --- СТИЛИ ВЕРХНЕЙ ЧАСТИ (HERO) --- */
+.internships-page {
+  margin-top: 40px;
+}
+
+.internships-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.internships-hero-content {
+  max-width: 700px;
+}
+
+.internships-title {
+  font-family: var(--font-display); /* Шрифт DAMN */
+  font-size: clamp(28px, 4vw, 42px);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 24px 0;
+  line-height: 1.2;
+}
+
+.search-icon {
+  background: var(--lime);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.search-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tag {
+  background: var(--white);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.tag:hover {
+  background: var(--hover-bg);
+}
+
+.internships-hero-image img {
+  max-width: 320px;
+  height: auto;
+}
