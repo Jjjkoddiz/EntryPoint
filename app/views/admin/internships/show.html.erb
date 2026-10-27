@@ -1,17 +1,869 @@
-<p style="color: green"><%= notice %></p>
 
-<%= render @internship %>
+<%
+  # Какая стажировка сейчас открыта
 
-<div>
-  <%= link_to "Назад к стажировкам", admin_internships_path %>
-  <% if user_signed_in? %>
-    <% if current_user.internships.include?(@internship) %>
-      <p>Уже в трекере</p>
-    <% else %>
-      <%= form_with url: admin_favorites_path, method: :post do |form| %>
-        <%= form.hidden_field :internship_id, value: @internship.id %>
-        <%= form.submit "Добавить в трекер" %>
-      <% end %>
+  company_name = @internship.company.name
+
+  is_avito = company_name == "Авито"
+
+  is_yandex = company_name == "Яндекс" &&
+              @internship.title.include?("Поиск")
+
+  favorite = current_user.favorites.find_by(
+    internship_id: @internship.id
+  ) if user_signed_in?
+
+  images_folder = "interships"
+
+
+  # =====================================
+  # ДАННЫЕ АВИТО
+  # =====================================
+
+  if is_avito
+
+    intro = "Avito Design Bootcamp — это программа, на которой вы будете решать реальные бизнес-задачи вместе с профессиональной командой. За год у вас будет возможность вырасти из стажёра до мидла, набравшись практического опыта и прокачав свои навыки. В программе участвуют несколько продуктовых команд, которые развивают ключевые направления Авито: от недвижимости и авто до работы и услуг. Вы сможете проявить себя в проектах, которые ежедневно влияют на жизнь миллионов людей."
+
+    company_sections = [
+      {
+        title: "Какие задачи вас ждут",
+        items: [
+          "работать над реальными потребностями пользователей — от покупки машины и поиска жилья до поиска работы или путешествий;",
+          "участвовать в полных продуктовых циклах: от исследования и прототипирования до запуска и анализа результата;",
+          "решать живые задачи — работать не с учебными макетами, а с настоящими проектами, которые улучшают опыт более 60 млн пользователей;",
+          "собирать обратную связь от пользователей и команды, совершенствовать решения;",
+          "улучшать и развивать существующие продукты: оптимизировать UX, совершенствовать функционал и добавлять новый;",
+          "создавать логичные, удобные и визуально привлекательные интерфейсы;",
+          "взаимодействовать с разработкой на всех этапах работы над продуктом."
+        ]
+      },
+      {
+        title: "Мы ждём, что вы",
+        items: [
+          "готовы работать 40 часов в неделю в удалённом или гибридном формате;",
+          "учитесь на 2−4-м курсе бакалавриата, 4−6-м курсе специалитета или уже есть диплом по технической, математической или IT-специальности;",
+          "умеете работать с дизайн-системой: соблюдать её или развивать;",
+          "умеете строить удобные пользовательские сценарии;",
+          "понимаете основы UX и визуального дизайна: иерархию, контраст, сетку, типографику;",
+          "понимаете основы вёрстки и знаете, как подавать информацию ясно и структурированно;",
+          "имеете минимальный опыт работы в команде (желательно в продуктовой);",
+          "можете показать портфолио с кейсами, где понятно описаны задачи и принятые решения;",
+          "внимательны к деталям."
+        ]
+      },
+      {
+        title: "Работа у нас — это:",
+        items: [
+          "официальное оплачиваемое трудоустройство;",
+          "период буткемпа — до 12 месяцев;",
+          "классная адаптация, профессиональные наставники и погружение в задачи с первого дня;",
+          "обучающие встречи: воркшопы, лекции и обмен опытом внутри дизайн-комьюнити Авито;",
+          "техника для продуктивной работы и компенсация питания;",
+          "доступ к корпоративным онлайн-библиотекам «МИФ» и «Альпина»;",
+          "забота о здоровье: в офисе принимают терапевт и массажист, есть два тренажёрных зала с душевыми, функциональные тренировки с тренером;",
+          "замечательный офис в двух минутах от метро «Белорусская»: панорамный вид на центр города, места для уединённой работы и зоны отдыха."
+        ]
+      }
+    ]
+
+    stages = [
+      {
+        title: "Портфолио",
+        image: "#{images_folder}/portfolio.webp",
+        heading: "Ваше портфолио посмотрят",
+        description: "Примеры работ стоит отправить вместе с резюме. Это поможет нам оценить ваши навыки."
+      },
+      {
+        title: "HR-собес",
+        image: "#{images_folder}/hr.webp",
+        heading: "Небольшой собес с HR",
+        description: "Рекрутер пообщается с вами об опыте работы, ожиданиях и ответит на любые вопросы."
+      },
+      {
+        title: "Тестовое",
+        image: "#{images_folder}/test.webp",
+        heading: "Выполнение тестового задания",
+        description: "Дедлайн вы определите сами и сможете задать нам вопросы в Телеграме."
+      },
+      {
+        title: "Собес с командой",
+        image: "#{images_folder}/team.webp",
+        heading: "Встреча с командой",
+        description: "Вы познакомитесь с продактом, исследователем и редактором, с которыми предстоит работать."
+      },
+      {
+        title: "Оффер",
+        image: "#{images_folder}/offer.webp",
+        heading: "Предложение о работе",
+        description: "Если тестовое будет замечательным и мы понравимся друг другу на встречах, вы получите оффер."
+      }
+    ]
+
+    candidate_name = "Алине Юсуповой"
+
+    candidate_intro = "Алина прошла отбор на стажировку 6 месяцев назад и готова поделиться опытом первых этапов"
+
+    candidate_answers = [
+      [
+        "Сколько времени на тестовое и что в нём проверяют?",
+        "На тестовое дали примерно шесть дней. По ощущениям, проверяли не только то, насколько аккуратно ты рисуешь, но и весь ход мысли: как понимаешь задачу, выбираешь аудиторию, формулируешь гипотезы и объясняешь свои решения."
+      ],
+      [
+        "Что было у тебя в тестовом?",
+        "Нужно было переработать первый экран раздела «Работа» в приложении Авито и подумать, как с его помощью увеличить возвращаемость пользователей. Я сфокусировалась на тех, кто уже искал работу и возвращается продолжить поиск: добавила быстрый возврат к предыдущему запросу, рекомендации, отклики и сохранённые поиски."
+      ],
+      [
+        "Что оказалось важнее всего в тестовом?",
+        "Не количество экранов и не идеальная графика, а логика. Важно было объяснить, какую проблему решает каждый блок и почему он оказался на первом экране. Ещё помогло показать, что я проверила прототип на пользователях и увидела, где мои решения считываются не так, как я ожидала."
+      ],
+      [
+        "Кто проводит интервью: HR, дизайнер или лид команды?",
+        "Сначала у меня было отдельное интервью с HR. После него — встреча с командой, где уже подробнее обсуждали портфолио, тестовое и то, как я рассуждаю над продуктовыми задачами. На встрече были дизайнеры и представители команды, в которую искали стажёра."
+      ],
+      [
+        "Какие вопросы задавали на интервью с командой?",
+        "Просили рассказать о проектах из портфолио, своей роли и о том, как я принимала решения. Много обсуждали тестовое: почему выбрала такой сценарий, как проверяла гипотезы и по каким метрикам оценивала бы результат. Ещё давали небольшие продуктовые ситуации и просили рассуждать вслух."
+      ],
+      [
+        "Что было неожиданно?",
+        "Некоторые вопросы звучали немного странно — например, куда я добавила бы рекламный блок или как отнеслась бы к идее «рулетки вакансий». Сначала хочется сразу придумать интерфейс, но на самом деле от тебя ждут уточняющих вопросов: зачем это нужно, для кого и какую проблему должно решить."
+      ],
+      [
+        "Совет соискателю",
+        "Не пытайтесь сразу выдать красивое готовое решение. Лучше задавайте вопросы и проговаривайте, как вы рассуждаете. Если чего-то не знаете, нормально сказать об этом и предложить, как бы вы это выяснили. На интервью намного важнее логика и адекватность, чем попытка угадать «правильный» ответ."
+      ]
+    ]
+
+
+  # =====================================
+  # ДАННЫЕ ЯНДЕКС ПОИСКА
+  # =====================================
+
+  elsif is_yandex
+
+    intro = "Яндекс Поиск помогает людям находить информацию, ориентироваться в сложных темах и решать повседневные задачи. Команда развивает поисковые интерфейсы и новые способы взаимодействия с искусственным интеллектом. На стажировке дизайнер участвует в проектировании пользовательских сценариев, создании прототипов и развитии дизайн-системы. Предстоит работать с компонентами в Figma, проверять решения, обсуждать гипотезы с командой и делать сложные технологии понятными пользователям."
+
+    company_sections = [
+      {
+        title: "Какие задачи вас ждут",
+        items: [
+          "проектировать новые возможности Яндекс Поиска и улучшать существующие пользовательские сценарии;",
+          "продумывать интерфейсы взаимодействия с искусственным интеллектом и различные состояния системы;",
+          "изучать, как люди ищут информацию, и находить проблемы в пользовательском опыте;",
+          "создавать прототипы и предлагать решения для проверки продуктовых гипотез;",
+          "работать с компонентами в Figma, описывать их поведение и развивать дизайн-систему;",
+          "учитывать обратную связь и совершенствовать интерфейсы после обсуждения с командой;",
+          "взаимодействовать с дизайнерами, менеджерами продукта и разработчиками."
+        ]
+      },
+      {
+        title: "Мы ждём, что вы",
+        items: [
+          "интересуетесь продуктовым дизайном, цифровыми сервисами и пользовательским опытом;",
+          "уверенно работаете в Figma, умеете создавать интерфейсы и компоненты;",
+          "понимаете принципы UX, композиции, типографики и визуальной иерархии;",
+          "умеете продумывать пользовательские сценарии и собирать интерактивные прототипы;",
+          "готовы исследовать задачу, задавать вопросы и аргументировать дизайн-решения;",
+          "внимательны к деталям и учитываете разные состояния интерфейса;",
+          "интересуетесь технологиями ИИ и хотите разбираться в новых инструментах;",
+          "готовы принимать обратную связь и учиться у коллег;",
+          "можете показать проекты, где понятны ваша роль, ход работы и результат."
+        ]
+      },
+      {
+        title: "Работа у нас — это:",
+        items: [
+          "работа в продуктовой команде Яндекс Поиска в московском офисе;",
+          "участие в развитии реальных интерфейсов и пользовательских сценариев;",
+          "совместная работа с дизайнерами, разработчиками и менеджерами продукта;",
+          "обратная связь от опытных коллег и поддержка в освоении задач;",
+          "возможность развивать навыки продуктового мышления, исследований и прототипирования;",
+          "практика работы с дизайн-системой и большим цифровым сервисом;",
+          "знакомство с процессами проектирования, обсуждения и проверки решений;",
+          "возможность увидеть, как дизайн влияет на опыт пользователей Поиска."
+        ]
+      }
+    ]
+
+    stages = [
+      {
+        title: "Портфолио",
+        image: "#{images_folder}/portfolio.webp",
+        heading: "Знакомство с портфолио",
+        description: "В проектах важно показать задачу, свою роль, принятые решения и полученный результат."
+      },
+      {
+        title: "HR-собес",
+        image: "#{images_folder}/hr.webp",
+        heading: "Первое знакомство",
+        description: "Обсуждение мотивации, опыта, ожиданий от стажировки и интереса к продуктам Яндекса."
+      },
+      {
+        title: "Тестовое",
+        image: "#{images_folder}/test.webp",
+        heading: "Практическая задача",
+        description: "Возможный этап: спроектировать сценарий поиска или прототип интерфейса и объяснить логику решений."
+      },
+      {
+        title: "Собес с командой",
+        image: "#{images_folder}/team.webp",
+        heading: "Встреча с дизайнерами",
+        description: "Обсуждение портфолио, процессов работы, пользовательских задач и подхода к проектированию."
+      },
+      {
+        title: "Оффер",
+        image: "#{images_folder}/offer.webp",
+        heading: "Предложение о работе",
+        description: "После прохождения отбора команда обсуждает результаты и возможное предложение о стажировке."
+      }
+    ]
+
+    candidate_name = "Марии Соколовой"
+
+    candidate_intro = "Мария делится опытом подготовки к отбору: от работы над портфолио до встречи с продуктовой командой"
+
+    candidate_answers = [
+      [
+        "Сколько времени заняла подготовка к отбору?",
+        "Я начала с портфолио: выбрала несколько проектов, в которых могла подробно объяснить задачу, свой вклад и результат. Потом повторила основы продуктового дизайна и потренировалась рассказывать о решениях. Особенно помогло подготовить примеры ситуаций, в которых пришлось менять первоначальную идею."
+      ],
+      [
+        "Что было в практическом задании?",
+        "Я разбирала сценарий поиска информации: как пользователь формулирует запрос, какие результаты ожидает увидеть и что делает, если ответ оказался недостаточно полезным. Подготовила несколько состояний интерфейса, продумала ошибки и показала, как можно проверить решение на пользователях."
+      ],
+      [
+        "Что оказалось важнее всего в задании?",
+        "Логика пользовательского сценария. Нужно было не просто сделать аккуратный экран, а объяснить, какую проблему решает каждый элемент. Я старалась показывать связь между потребностями человека, возможностями продукта и ограничениями реализации."
+      ],
+      [
+        "Кто проводит интервью: HR, дизайнер или лид команды?",
+        "Сначала было знакомство с рекрутером: обсуждали опыт и мотивацию. Затем разговор с дизайнерами, где мы подробнее разбирали портфолио и подход к продуктовым задачам."
+      ],
+      [
+        "Какие вопросы задавали на интервью с командой?",
+        "Говорили о проектах, гипотезах и проверке решений. Например, как улучшить сценарий поиска, что делать с неоднозначным запросом или как помочь человеку оценить ответ ИИ. Важно было не угадывать ответ, а рассуждать и задавать уточняющие вопросы."
+      ],
+      [
+        "Что было неожиданно?",
+        "Я поняла, что даже привычный интерфейс поиска состоит из множества сценариев: уточнение запроса, выбор результата, ошибки, доверие к информации. Сложнее всего оказалось выбрать главное и не пытаться решить всё одновременно."
+      ],
+      [
+        "Совет соискателю",
+        "Подготовьте несколько проектов, о которых можете уверенно рассказать. Покажите, как исследовали проблему, выбирали решение и проверяли результат. Если вопрос связан с ИИ, подумайте об ошибках и доверии пользователя. Не бойтесь уточнять условия задачи."
+      ]
+    ]
+
+
+  # =====================================
+  # ДРУГИЕ СТАЖИРОВКИ
+  # =====================================
+
+  else
+
+    intro = @internship.description.to_s
+    company_sections = []
+    stages = []
+    candidate_answers = []
+
+  end
+
+
+  # =====================================
+  # ОБЩИЕ ИЛЛЮСТРАЦИИ
+  # =====================================
+
+  qualities = [
+    {
+      title: "UX-логика",
+      image: "#{images_folder}/logic.webp"
+    },
+    {
+      title: "Продуктовое мышление",
+      image: "#{images_folder}/product.webp"
+    },
+    {
+      title: "Работа с дизайн-системой",
+      image: "#{images_folder}/system.webp"
+    },
+    {
+      title: "Аргументация решений",
+      image: "#{images_folder}/arguments.webp"
+    }
+  ]
+
+  has_insights = is_avito || is_yandex
+%>
+
+
+<main
+  class="growy-detail"
+  data-controller="internship-detail"
+  data-internship-detail-company-value="<%= is_yandex ? 'yandex' : 'avito' %>"
+>
+
+  <!-- ВЕРХНЯЯ ЧАСТЬ -->
+
+  <div class="growy-detail-top">
+
+    <%= link_to admin_internships_path,
+        class: "growy-detail-back",
+        aria: { label: "Вернуться к стажировкам" } do %>
+
+      <svg viewBox="0 0 24 24" width="24" height="24"
+           fill="none" stroke="currentColor"
+           stroke-width="1.8" stroke-linecap="round"
+           stroke-linejoin="round" aria-hidden="true">
+        <path d="m14 5-7 7 7 7M7 12h13" />
+      </svg>
+
     <% end %>
+
+
+    <div class="growy-detail-body">
+
+      <!-- ЗАГОЛОВОК -->
+
+      <div class="growy-detail-heading">
+
+        <h1><%= @internship.title %></h1>
+
+        <!-- ИЗБРАННОЕ -->
+
+        <% if user_signed_in? %>
+
+          <% if favorite %>
+
+            <%= form_with url: admin_favorite_path(favorite),
+                method: :delete,
+                class: "growy-detail-heart-form" do %>
+
+              <button
+                type="submit"
+                class="growy-detail-heart is-saved"
+                aria-label="Убрать из избранного"
+                aria-pressed="true"
+              >
+                <svg viewBox="0 0 24 24" width="24" height="24"
+                     fill="none" stroke="currentColor"
+                     stroke-width="1.8" aria-hidden="true">
+                  <path d="M20.8 8.6c0 4.7-8.8 10.1-8.8 10.1S3.2 13.3 3.2 8.6a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z" />
+                </svg>
+              </button>
+
+            <% end %>
+
+          <% else %>
+
+            <%= form_with url: admin_favorites_path,
+                method: :post,
+                class: "growy-detail-heart-form" do %>
+
+              <%= hidden_field_tag :internship_id, @internship.id %>
+
+              <button
+                type="submit"
+                class="growy-detail-heart"
+                aria-label="Добавить в избранное"
+                aria-pressed="false"
+              >
+                <svg viewBox="0 0 24 24" width="24" height="24"
+                     fill="none" stroke="currentColor"
+                     stroke-width="1.8" aria-hidden="true">
+                  <path d="M20.8 8.6c0 4.7-8.8 10.1-8.8 10.1S3.2 13.3 3.2 8.6a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z" />
+                </svg>
+              </button>
+
+            <% end %>
+
+          <% end %>
+
+        <% else %>
+
+          <%= link_to new_user_session_path,
+              class: "growy-detail-heart",
+              aria: { label: "Войти, чтобы добавить в избранное" } do %>
+
+            <svg viewBox="0 0 24 24" width="24" height="24"
+                 fill="none" stroke="currentColor"
+                 stroke-width="1.8" aria-hidden="true">
+              <path d="M20.8 8.6c0 4.7-8.8 10.1-8.8 10.1S3.2 13.3 3.2 8.6a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z" />
+            </svg>
+
+          <% end %>
+
+        <% end %>
+
+      </div>
+
+
+      <!-- ИНФОРМАЦИЯ О ВАКАНСИИ -->
+
+      <p class="growy-detail-meta">
+        <%= [
+          @internship.location,
+          ("Продуктовый дизайн" if has_insights),
+          @internship.format
+        ].compact.reject(&:blank?).join(" • ") %>
+      </p>
+
+
+      <!-- КНОПКИ -->
+
+      <div class="growy-detail-actions">
+
+        <% if @internship.source_url.present? %>
+
+          <%= link_to "Откликнуться",
+              @internship.source_url,
+              class: "growy-detail-btn growy-detail-btn--dark",
+              target: "_blank",
+              rel: "noopener noreferrer" %>
+
+        <% end %>
+
+        <% if has_insights %>
+
+          <%= link_to "Получить инсайт от GROWY",
+              "#growy-insights",
+              class: "growy-detail-btn growy-detail-btn--lime" %>
+
+        <% end %>
+
+      </div>
+
+
+      <!-- ОПИСАНИЕ -->
+
+      <p class="growy-detail-lead">
+        <%= intro %>
+      </p>
+
+
+      <!-- ТРИ АККОРДЕОНА ОТ КОМПАНИИ -->
+
+      <% if company_sections.any? %>
+
+        <div class="growy-detail-accordions"
+             aria-label="Информация о стажировке">
+
+          <% company_sections.each do |section| %>
+
+            <details class="growy-detail-accordion">
+
+              <summary>
+                <%= section[:title] %>
+                <span class="growy-detail-chevron"
+                      aria-hidden="true"></span>
+              </summary>
+
+              <div class="growy-detail-accordion-content">
+                <ul>
+                  <% section[:items].each do |item| %>
+                    <li><%= item %></li>
+                  <% end %>
+                </ul>
+              </div>
+
+            </details>
+
+          <% end %>
+
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+
+
+  <!-- ИНСАЙТЫ GROWY -->
+
+  <% if has_insights %>
+
+    <section
+      class="growy-detail-insights"
+      id="growy-insights"
+      aria-labelledby="growy-insights-title"
+    >
+
+      <div class="growy-detail-insights-inner">
+
+        <h2
+          class="growy-detail-insights-title"
+          id="growy-insights-title"
+        >
+          Инсайты от Growy
+        </h2>
+
+
+        <!-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК -->
+
+        <div class="growy-detail-tabs"
+             role="tablist"
+             aria-label="Разделы инсайтов">
+
+          <% [
+            ["stages", "Этапы отбора"],
+            ["qualities", "Что проверяют"],
+            ["questions", "Вопросы на интервью"],
+            ["experience", "Опыт кандидатов"]
+          ].each_with_index do |(key, label), index| %>
+
+            <button
+              id="growy-tab-<%= key %>"
+              type="button"
+              role="tab"
+              class="growy-detail-tab <%= 'is-active' if index.zero? %>"
+              data-internship-detail-target="tab"
+              data-tab="<%= key %>"
+              data-action="click->internship-detail#selectTab keydown->internship-detail#tabKeydown"
+              aria-controls="growy-panel-<%= key %>"
+              aria-selected="<%= index.zero? %>"
+              tabindex="<%= index.zero? ? 0 : -1 %>"
+            >
+              <%= label %>
+            </button>
+
+          <% end %>
+
+        </div>
+
+
+        <!-- 01. ЭТАПЫ ОТБОРА -->
+
+        <div
+          id="growy-panel-stages"
+          class="growy-detail-panel"
+          data-internship-detail-target="panel"
+          data-panel="stages"
+          role="tabpanel"
+          aria-labelledby="growy-tab-stages"
+        >
+
+          <div class="growy-detail-stage-track">
+
+            <% stages.each do |stage| %>
+
+              <button
+                type="button"
+                class="growy-detail-stage"
+                data-action="click->internship-detail#flipStage"
+                aria-label="Подробнее об этапе <%= stage[:title] %>"
+                aria-pressed="false"
+              >
+
+                <span class="growy-detail-stage-inner">
+
+                  <!-- ЛИЦЕВАЯ СТОРОНА -->
+
+                  <span class="growy-detail-stage-front">
+
+                    <span class="growy-detail-stage-toggle"
+                          aria-hidden="true"></span>
+
+                    <span class="growy-detail-stage-art">
+                      <%= image_tag stage[:image],
+                          alt: "",
+                          loading: "lazy" %>
+                    </span>
+
+                    <span class="growy-detail-stage-name">
+                      <%= stage[:title] %>
+                    </span>
+
+                  </span>
+
+
+                  <!-- ОБРАТНАЯ СТОРОНА -->
+
+                  <span class="growy-detail-stage-back">
+
+                    <span class="growy-detail-stage-toggle"
+                          aria-hidden="true"></span>
+
+                    <span class="growy-detail-stage-back-copy">
+
+                      <span class="growy-detail-stage-back-title">
+                        <%= stage[:heading] %>
+                      </span>
+
+                      <span class="growy-detail-stage-back-text">
+                        <%= stage[:description] %>
+                      </span>
+
+                    </span>
+
+                  </span>
+
+                </span>
+
+              </button>
+
+            <% end %>
+
+          </div>
+        </div>
+
+
+        <!-- 02. ЧТО ПРОВЕРЯЮТ -->
+
+        <div
+          id="growy-panel-qualities"
+          class="growy-detail-panel"
+          data-internship-detail-target="panel"
+          data-panel="qualities"
+          role="tabpanel"
+          aria-labelledby="growy-tab-qualities"
+          hidden
+        >
+
+          <div class="growy-detail-qualities">
+
+            <% qualities.each do |quality| %>
+
+              <div class="growy-detail-quality">
+
+                <div class="growy-detail-quality-art">
+                  <%= image_tag quality[:image],
+                      alt: "",
+                      loading: "lazy" %>
+                </div>
+
+                <h3><%= quality[:title] %></h3>
+
+              </div>
+
+            <% end %>
+
+          </div>
+
+        </div>
+
+
+        <!-- 03. ВОПРОСЫ НА ИНТЕРВЬЮ -->
+
+        <div
+          id="growy-panel-questions"
+          class="growy-detail-panel"
+          data-internship-detail-target="panel"
+          data-panel="questions"
+          role="tabpanel"
+          aria-labelledby="growy-tab-questions"
+          hidden
+        >
+
+          <div class="growy-detail-section-intro">
+
+            <h3>
+              Вопросы, к которым стоит подготовиться
+            </h3>
+
+            <p>
+              На интервью чаще проверяют ход мысли:
+              как кандидат понимает задачу,
+              аргументирует решения и связывает
+              дизайн с продуктовой целью.
+            </p>
+
+          </div>
+
+
+          <div class="growy-detail-quiz-layout">
+
+            <!-- СПИСОК ТЕМ -->
+
+            <div
+              class="growy-detail-topics"
+              data-internship-detail-target="topics"
+              role="group"
+              aria-label="Темы вопросов"
+            ></div>
+
+
+            <!-- КАРТОЧКА ВОПРОСА -->
+
+            <div class="growy-detail-quiz-right">
+
+              <div class="growy-detail-quiz-controls">
+
+                <button
+                  class="growy-detail-quiz-arrow"
+                  type="button"
+                  data-action="click->internship-detail#previousQuestion"
+                  aria-label="Предыдущий вопрос"
+                >
+                  <svg viewBox="0 0 24 24" width="24" height="24"
+                       fill="none" stroke="currentColor"
+                       stroke-width="1.8" aria-hidden="true">
+                    <path d="m14 5-7 7 7 7M7 12h13" />
+                  </svg>
+                </button>
+
+
+                <div class="growy-detail-quiz-stack">
+
+                  <button
+                    type="button"
+                    class="growy-detail-question-card"
+                    data-internship-detail-target="questionCard"
+                    data-action="click->internship-detail#flipQuestion"
+                    aria-label="Перевернуть карточку вопроса"
+                    aria-pressed="false"
+                  >
+
+                    <!-- ЛИЦЕВАЯ СТОРОНА -->
+
+                    <span class="growy-detail-question-face growy-detail-question-front">
+
+                      <span
+                        class="growy-detail-question-category"
+                        data-internship-detail-target="questionCategory"
+                      ></span>
+
+                      <span
+                        class="growy-detail-question-main"
+                        data-internship-detail-target="questionTitle"
+                      ></span>
+
+                      <span class="growy-detail-question-hint">
+                        Нажми, чтобы увидеть разбор
+                      </span>
+
+                      <span
+                        class="growy-detail-question-position"
+                        data-internship-detail-target="questionPosition"
+                      ></span>
+
+                    </span>
+
+
+                    <!-- ОБРАТНАЯ СТОРОНА -->
+
+                    <span
+                      class="growy-detail-question-face growy-detail-question-back"
+                      aria-hidden="true"
+                    >
+
+                      <span
+                        class="growy-detail-question-category"
+                        data-internship-detail-target="questionBackCategory"
+                      ></span>
+
+                      <span class="growy-detail-question-back-copy">
+
+                        <strong
+                          data-internship-detail-target="questionCriteriaLabel"
+                        ></strong>
+
+                        <span
+                          data-internship-detail-target="questionCriteria"
+                        ></span>
+
+                        <strong>Чек-лист</strong>
+
+                        <span
+                          data-internship-detail-target="questionChecklist"
+                        ></span>
+
+                      </span>
+
+                      <span
+                        class="growy-detail-question-position"
+                        data-internship-detail-target="questionBackPosition"
+                      ></span>
+
+                    </span>
+
+                  </button>
+
+                </div>
+
+
+                <button
+                  class="growy-detail-quiz-arrow"
+                  type="button"
+                  data-action="click->internship-detail#nextQuestion"
+                  aria-label="Следующий вопрос"
+                >
+                  <svg viewBox="0 0 24 24" width="24" height="24"
+                       fill="none" stroke="currentColor"
+                       stroke-width="1.8" aria-hidden="true">
+                    <path d="m10 5 7 7-7 7M17 12H4" />
+                  </svg>
+                </button>
+
+              </div>
+
+
+              <!-- ПАГИНАЦИЯ -->
+
+              <div
+                class="growy-detail-quiz-dots"
+                data-internship-detail-target="dots"
+                aria-label="Номер вопроса"
+              ></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- 04. ОПЫТ КАНДИДАТОВ -->
+
+        <div
+          id="growy-panel-experience"
+          class="growy-detail-panel"
+          data-internship-detail-target="panel"
+          data-panel="experience"
+          role="tabpanel"
+          aria-labelledby="growy-tab-experience"
+          hidden
+        >
+
+          <div class="growy-detail-section-intro">
+
+            <h3>
+              Задали вопросы <%= candidate_name %>
+            </h3>
+
+            <p>
+              <%= candidate_intro %>
+            </p>
+
+          </div>
+
+
+          <div class="growy-detail-experience-accordions">
+
+            <% candidate_answers.each do |question, answer| %>
+
+              <details class="growy-detail-accordion growy-detail-accordion--experience">
+
+                <summary>
+                  <%= question %>
+
+                  <span class="growy-detail-chevron"
+                        aria-hidden="true"></span>
+                </summary>
+
+                <div class="growy-detail-accordion-content">
+                  <p><%= answer %></p>
+                </div>
+
+              </details>
+
+            <% end %>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
   <% end %>
-</div>
+
+</main>

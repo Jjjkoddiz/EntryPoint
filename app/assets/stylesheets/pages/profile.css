@@ -1,0 +1,393 @@
+.growy-profile {
+  width: 100%;
+  max-width: 880px;
+  margin: 56px auto 0;
+
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+.growy-profile *,
+.growy-profile *::before,
+.growy-profile *::after {
+  box-sizing: border-box;
+}
+
+.growy-profile-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.growy-profile-avatar {
+  width: 104px;
+  height: 104px;
+  flex-shrink: 0;
+
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.growy-profile-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+.growy-profile-name {
+  margin: 16px 0 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-h3);
+  font-weight: 500;
+  line-height: var(--line-h3);
+}
+
+.growy-profile-contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 48px;
+  text-align: center;
+}
+
+.growy-profile-section-title {
+  margin: 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-h3);
+  font-weight: 500;
+  line-height: var(--line-h3);
+}
+
+.growy-profile-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  margin-top: 16px;
+}
+
+.growy-profile-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.growy-profile-contact-label {
+  margin: 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-description);
+  font-weight: 500;
+  line-height: var(--line-base);
+
+  color: var(--muted);
+}
+
+.growy-profile-contact-value {
+  margin: 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+  line-height: var(--line-base);
+
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.growy-profile-favorites {
+  width: 100%;
+  margin-top: 48px;
+}
+
+.growy-profile-favorites > .growy-profile-section-title {
+  text-align: center;
+}
+
+.growy-profile-favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 100%;
+  margin-top: 16px;
+}
+
+.growy-profile-card {
+  width: 100%;
+  min-height: 134px;
+  padding: 20px;
+
+  border-radius: 20px;
+  background: var(--white);
+}
+
+.growy-profile-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+  min-height: 24px;
+}
+
+.growy-profile-card-company {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  min-width: 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+  line-height: var(--line-base);
+
+  color: var(--muted);
+}
+
+.growy-profile-company-dot {
+  display: block;
+  flex: 0 0 20px;
+
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+  background: var(--profile-company-dot, #91d77c);
+}
+
+.growy-profile-heart-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+
+  margin: 0;
+}
+
+.growy-profile-heart {
+  display: grid;
+  place-items: center;
+
+  width: 24px;
+  height: 24px;
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: var(--text);
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.growy-profile-heart svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.growy-profile-heart:hover {
+  color: var(--green);
+  transform: scale(1.08);
+}
+
+.growy-profile-heart:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Название */
+
+.growy-profile-card-title {
+  margin: 12px 0 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-h3);
+  font-weight: 500;
+  line-height: var(--line-h3);
+
+  overflow-wrap: break-word;
+}
+
+.growy-profile-card-title a {
+  color: inherit;
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.growy-profile-card-title a:hover {
+  color: var(--green);
+}
+
+.growy-profile-card-meta {
+  margin: 12px 0 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+  line-height: var(--line-base);
+
+  color: var(--muted);
+}
+
+.growy-profile-empty {
+  padding: 32px 24px;
+
+  border-radius: 20px;
+  background: var(--white);
+  text-align: center;
+}
+
+.growy-profile-empty p {
+  margin: 0 0 20px;
+}
+
+.growy-profile-empty-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  padding: 12px 24px;
+
+  border-radius: 16px;
+  background: var(--text);
+  color: var(--white);
+
+  font-size: var(--type-base);
+  text-decoration: none;
+}
+
+.growy-profile-empty-link:hover {
+  background: #191919;
+}
+
+.growy-profile-login {
+  text-align: center;
+}
+
+.growy-profile-login h3 {
+  margin: 0 0 24px;
+}
+
+.growy-page:has(.growy-profile) .growy-footer {
+  width: 100%;
+  max-width: 880px;
+  margin: 48px auto 0;
+}
+
+.growy-profile-logout {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.growy-profile-logout-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 170px;
+  height: 44px;
+  padding: 0 20px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: var(--white);
+  color: var(--text);
+
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.growy-profile-logout-button:hover {
+  background: #e0e0e0;
+}
+
+.growy-profile-logout-button:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1000px) {
+  .growy-profile {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 700px) {
+  .growy-profile {
+    margin-top: 32px;
+  }
+
+  .growy-profile-contacts {
+    margin-top: 36px;
+  }
+
+  .growy-profile-favorites {
+    margin-top: 40px;
+  }
+
+  .growy-profile-card {
+    min-height: 0;
+    padding: 18px;
+    border-radius: 15px;
+  }
+
+  .growy-profile-card-title {
+    font-size: 19px;
+  }
+
+  .growy-profile-card-meta {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .growy-page:has(.growy-profile) .growy-footer {
+    margin-top: 48px;
+  }
+
+  .growy-profile-logout {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .growy-profile-card {
+    padding: 16px;
+  }
+
+  .growy-profile-card-title {
+    font-size: 18px;
+  }
+
+  .growy-profile-card-meta {
+    font-size: 13px;
+  }
+}

@@ -1,2 +1,33 @@
-<h1>Admin::Home#index</h1>
-<p>Find me in app/views/admin/home/index.html.erb</p>
+<main>
+  <section class="growy-hero" id="about">
+    <div class="growy-hero-visual">
+      <%= image_tag "home/growy-hero.webp",
+          alt: "Зелёный стажёр GROWY" %>
+    </div>
+
+    <div class="growy-hero-content">
+      <h1 class="h1">
+        Сервис для поиска
+        <br class="desktop-break">
+        дизайн-стажировок
+      </h1>
+      <p class="h4">
+        В сервисе будут доступны подборка открытых стажировок,
+        опыт кандидатов, прошедших отбор,<br>
+        и чек-листы для подготовки
+      </p>
+    </div>
+  </section>
+
+  <section class="growy-subscribe">
+    <div class="growy-subscribe-content">
+      <h4 class="h4 growy-subscribe-title">
+        Узнайте первыми о запуске!
+        <br>
+        Будем присылать только полезную информацию
+      </h4>
+
+      <%= render "subscriptions/form" %>
+    </div>
+  </section>
+</main>

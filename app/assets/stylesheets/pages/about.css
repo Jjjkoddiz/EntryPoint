@@ -1,0 +1,660 @@
+.growy-about {
+  --about-width: 880px;
+  --about-card-gap: 24px;
+  --about-section-gap: 64px;
+
+  width: 100%;
+  position: relative;
+}
+
+.growy-page:has(.growy-about) {
+  overflow-x: clip;
+}
+
+.growy-page:has(.growy-about) .growy-header {
+  position: relative;
+  z-index: 5;
+}
+
+.growy-about-hero {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+
+  width: 100%;
+  max-width: var(--about-width);
+  min-height: 559px;
+  margin: 0 auto;
+  padding-top: 54px;
+}
+
+.growy-about-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+
+  top: -260px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100vw;
+  height: calc(100% + 260px);
+
+  background: linear-gradient(
+    115deg,
+    var(--green) 0%,
+    #65d92b 48%,
+    var(--lime) 100%
+  );
+
+  border-radius: 0 0 16px 16px;
+}
+
+.growy-about-hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+}
+
+.growy-about-hero-title {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 1.05;
+
+  color: var(--white);
+}
+
+.growy-about-hero-description {
+  max-width: 540px;
+  margin: 20px 0 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+  line-height: var(--line-base);
+
+  color: var(--white);
+}
+
+.growy-about-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 296px;
+  max-width: 100%;
+  height: 54px;
+  margin-top: 44px;
+  padding: 0 20px;
+
+  border: none;
+  border-radius: 20px;
+
+  background: var(--text);
+  color: var(--white);
+
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+  line-height: var(--line-base);
+
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.growy-about-button:hover {
+  background: #191919;
+}
+
+.growy-about-button:active {
+  transform: translateY(1px);
+}
+
+.growy-about-button:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+}
+
+/* Большая 3D-иллюстрация */
+
+.growy-about-hero-art {
+  position: absolute;
+  z-index: 1;
+
+  left: 428px;
+
+  top: 60px;
+
+  width: 780px;
+  max-width: none;
+
+  pointer-events: none;
+}
+
+.growy-about-hero-art img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+.growy-about-eyebrow {
+  margin: 0 0 8px;
+
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+  line-height: var(--line-base);
+
+  color: #b4b4b4;
+  text-align: center;
+}
+
+.growy-about-section-title {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 1.05;
+
+  color: var(--text);
+  text-align: center;
+}
+
+.growy-about-features {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: var(--about-width);
+  margin: 0 auto;
+  padding-top: 64px;
+}
+
+.growy-about-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--about-card-gap);
+
+  margin-top: 32px;
+}
+
+/* Общий стиль карточки */
+
+.growy-about-feature {
+  position: relative;
+
+  min-width: 0;
+  min-height: 260px;
+  padding: 32px 36px;
+
+  overflow: hidden;
+  border-radius: 15px;
+
+  background: var(--white);
+  color: var(--text);
+}
+
+.growy-about-feature--green {
+  background: var(--green);
+  color: var(--white);
+}
+
+.growy-about-feature--white {
+  background: var(--white);
+  color: var(--text);
+}
+
+/* Текст карточки */
+
+.growy-about-feature-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 255px;
+}
+
+.growy-about-feature-title {
+  margin: 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-h2);
+  font-weight: 500;
+  line-height: var(--line-h2);
+
+  color: inherit;
+}
+
+.growy-about-feature-description {
+  max-width: 245px;
+  margin: 16px 0 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+  line-height: var(--line-base);
+
+  color: inherit;
+}
+
+/* Иллюстрации карточек */
+
+.growy-about-feature-image {
+  position: absolute;
+  z-index: 1;
+
+  right: 0;
+  bottom: 0;
+
+  width: var(--art-width, 180px);
+  height: auto;
+  max-width: none;
+
+  transform: translate(var(--art-x, 0px), var(--art-y, 0px));
+
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Индивидуальные размеры и позиции.
+   Можно настраивать независимо
+   под каждый прозрачный WebP. */
+
+.growy-about-feature--internships {
+  --art-width: 180px;
+  --art-x: 8px;
+  --art-y: 8px;
+}
+
+.growy-about-feature--experience {
+  --art-width: 185px;
+  --art-x: 6px;
+  --art-y: 4px;
+}
+
+.growy-about-feature--checklists {
+  --art-width: 190px;
+  --art-x: 8px;
+  --art-y: 6px;
+}
+
+.growy-about-feature--notifications {
+  --art-width: 180px;
+  --art-x: 0px;
+  --art-y: 2px;
+}
+
+.growy-about-steps {
+  width: 100%;
+  max-width: var(--about-width);
+  margin: var(--about-section-gap) auto 0;
+}
+
+.growy-about-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+
+  width: 100%;
+  max-width: 576px;
+  margin: 32px auto 0;
+}
+
+/* Карточка шага */
+
+.growy-about-step {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  min-width: 0;
+  min-height: 286px;
+  padding: 22px;
+
+  overflow: hidden;
+  border-radius: 15px;
+
+  background: var(--white);
+  color: var(--text);
+}
+
+.growy-about-step--white {
+  background: var(--white);
+  color: var(--text);
+}
+
+.growy-about-step--green {
+  background: var(--green);
+  color: var(--white);
+}
+
+/* 3D-цифра */
+
+.growy-about-step-number {
+  display: block;
+
+  width: 74px;
+  height: 80px;
+  max-width: 100%;
+
+  object-fit: contain;
+  object-position: left top;
+}
+
+/* Текст шага */
+
+.growy-about-step-content {
+  width: 100%;
+}
+
+.growy-about-step-title {
+  margin: 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-h3);
+  font-weight: 500;
+  line-height: var(--line-h3);
+
+  color: inherit;
+}
+
+.growy-about-step-description {
+  margin: 12px 0 0;
+
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+  line-height: var(--line-base);
+
+  color: inherit;
+}
+
+.growy-about-step--white .growy-about-step-description {
+  color: var(--muted);
+}
+
+.growy-about-cta {
+  width: 100%;
+  max-width: var(--about-width);
+  margin: var(--about-section-gap) auto 0;
+
+  text-align: center;
+}
+
+.growy-about-cta-title {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.growy-about-cta-button {
+  width: 268px;
+  margin-top: 40px;
+}
+
+/* Футер страницы О нас */
+
+.growy-page:has(.growy-about) .growy-footer {
+  width: 100%;
+  max-width: 880px;
+  margin: 100px auto 0;
+}
+
+/* Скругление начала серого блока */
+
+.growy-about-hero::before {
+  border-radius: 0;
+}
+
+.growy-about-features::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100vw;
+  height: 40px;
+
+  background: var(--page-bg);
+  border-radius: 20px 20px 0 0;
+  pointer-events: none;
+}
+
+@media (max-width: 1100px) {
+  .growy-about-hero-art {
+    left: 49%;
+    width: min(780px, 78vw);
+  }
+}
+
+@media (max-width: 900px) {
+  .growy-about-hero-copy {
+    max-width: 55%;
+  }
+
+  .growy-about-hero-title {
+    font-size: clamp(42px, 5.8vw, 58px);
+  }
+
+  .growy-about-hero-description {
+    max-width: 370px;
+  }
+
+  .growy-about-hero-art {
+    left: 48%;
+    width: 72vw;
+  }
+
+  .growy-about-feature {
+    padding: 28px;
+  }
+
+  .growy-about-feature-image {
+    width: min(var(--art-width, 180px), 42%);
+  }
+}
+
+@media (max-width: 760px) {
+  .growy-about {
+    --about-section-gap: 48px;
+  }
+
+  .growy-about-hero {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 0;
+    padding-top: 40px;
+  }
+
+  .growy-about-hero-copy {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .growy-about-hero-title {
+    font-size: clamp(40px, 8vw, 56px);
+    line-height: 1.05;
+  }
+
+  .about-desktop-break {
+    display: none;
+  }
+
+  .growy-about-hero-description {
+    max-width: 520px;
+    margin-top: 20px;
+  }
+
+  .growy-about-hero .growy-about-button {
+    margin-top: 32px;
+  }
+
+  /* Иллюстрация в потоке страницы */
+
+  .growy-about-hero-art {
+    position: relative;
+
+    left: auto;
+    top: auto;
+
+    align-self: center;
+
+    width: min(560px, 125%);
+    max-width: none;
+
+    margin-top: 28px;
+    margin-bottom: -36px;
+
+    transform: none;
+  }
+
+  .growy-about-hero-art img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Заголовки */
+
+  .growy-about-section-title {
+    font-size: clamp(40px, 7vw, 56px);
+  }
+
+  .growy-about-features {
+    padding-top: 72px;
+  }
+
+  .growy-about-features-grid,
+  .growy-about-steps-grid {
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 700px) {
+  .growy-about-hero {
+    padding-top: 32px;
+  }
+
+  .growy-about-hero-title {
+    font-size: clamp(40px, 10vw, 52px);
+  }
+
+  .growy-about-hero-description {
+    font-size: 16px;
+  }
+
+  .growy-about-hero .growy-about-button {
+    width: 100%;
+    max-width: 296px;
+  }
+
+  .growy-about-features-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .growy-about-feature {
+    min-height: 240px;
+    padding: 26px;
+    border-radius: 13px;
+  }
+
+  .growy-about-feature-content {
+    max-width: 70%;
+  }
+
+  .growy-about-feature-title {
+    font-size: clamp(22px, 5.5vw, 28px);
+  }
+
+  .growy-about-feature-description {
+    font-size: 15px;
+  }
+
+  .growy-about-feature-image {
+    width: min(var(--art-width, 180px), 44%);
+  }
+
+  /* Карточки шагов */
+
+  .growy-about-steps-grid {
+    gap: 16px;
+  }
+
+  .growy-about-step {
+    min-height: 260px;
+    padding: 20px;
+    border-radius: 13px;
+  }
+
+  .growy-about-step-number {
+    width: 64px;
+    height: 68px;
+  }
+
+  /* Финальный блок */
+
+  .growy-about-cta-button {
+    width: 100%;
+    max-width: 268px;
+    margin-top: 28px;
+  }
+
+  .growy-page:has(.growy-about) .growy-footer {
+    margin-top: 64px;
+  }
+}
+
+@media (max-width: 620px) {
+  .growy-about-steps-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 428px;
+  }
+
+  .growy-about-step {
+    min-height: 230px;
+  }
+
+  .growy-about-step-content {
+    max-width: 290px;
+  }
+}
+
+@media (max-width: 360px) {
+  .growy-about-feature {
+    padding: 20px;
+  }
+
+  .growy-about-feature-description {
+    font-size: 14px;
+  }
+
+  .growy-about-feature-image {
+    width: min(var(--art-width, 180px), 42%);
+  }
+
+  .growy-about-hero-title {
+    font-size: 38px;
+  }
+}
+
+/* Уважение настройки уменьшения анимации */
+
+@media (prefers-reduced-motion: reduce) {
+  .growy-about-button {
+    transition: none;
+  }
+}

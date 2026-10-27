@@ -1,88 +1,249 @@
-<div class="internships-page">
-  
-  <!-- ВЕРХНЯЯ ЧАСТЬ: Заголовок, теги и картинка -->
-  <section class="internships-hero">
-    <div class="internships-hero-content">
-      <h1 class="internships-title">
-        <span class="search-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </span> 
-        Что, если найти себя на Growy
-      </h1>
-      
-      <div class="search-tags">
-        <button class="tag">Коммуникационный дизайн</button>
-        <button class="tag">Продуктовый дизайн</button>
-        <button class="tag">Яндекс</button>
-        <button class="tag">Удаленная работа</button>
-        <button class="tag">Москва</button>
-        <button class="tag">Все вакансии ↓</button>
+<%
+  filter_groups = [
+    { key: 'design', label: 'Направление дизайна', search: 'Какой дизайн',
+      options: ['Коммуникационный', 'Продуктовый'] },
+    { key: 'skills', label: 'Навыки', search: 'Какие навыки есть',
+      options: [
+        'Figma', 'Типографика', 'Композиция и сетки', 'Работа с цветом',
+        'Создание презентаций', 'UX-исследования',
+        'Проектирование пользовательских сценариев', 'Прототипирование',
+        'Юзабилити-тестирование', 'Дизайн-системы', 'Аналитика и A/B-тесты',
+        'Мобильные интерфейсы', 'Веб-интерфейсы', 'Айдентика и брендинг',
+        'Графический дизайн', 'Иллюстрация', 'Моушн-дизайн', '3D-графика',
+        'Вёрстка', 'Полиграфия и препресс', 'Key Visual'
+      ] },
+    { key: 'format', label: 'Формат', search: 'Какой формат',
+      options: ['Удалённо', 'В офисе', 'Гибрид'] },
+    { key: 'city', label: 'Город', search: 'В каком городе',
+      options: ['Москва', 'Санкт-Петербург', 'Казань', 'Екатеринбург', 'Другие города'] },
+    { key: 'company', label: 'Компания', search: 'Какая компания',
+      options: ['Авито', 'Яндекс', 'VK', 'Сбер', 'Т-Банк', 'Ozon', 'Другие компании'] },
+    { key: 'salary', label: 'Зарплата', search: 'Какая зарплата',
+      options: [
+        'Только оплачиваемые', 'Зарплата не указана', 'Зарплата указана',
+        'От 30 000 ₽', 'От 50 000 ₽', 'От 70 000 ₽'
+      ] }
+  ]
+%>
+
+<main class="internships-page" data-internships>
+
+  <section class="internships-discovery" aria-label="Поиск стажировок">
+    <h1 class="visually-hidden">Что, если найти себя на Growy</h1>
+    <form class="internships-search" role="search" data-search-form>
+      <button class="internships-search-submit" type="submit" aria-label="Найти стажировки">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="10.8" cy="10.8" r="7.2" />
+          <path d="m16 16 5 5" />
+        </svg>
+      </button>
+      <input
+        class="internships-search-input"
+        data-search-input
+        type="text"
+        name="q"
+        aria-label="Поиск по вакансиям"
+        placeholder="Что, если найти себя на Growy"
+        autocomplete="off"
+        spellcheck="false"
+      >
+    </form>
+
+    <div class="internships-suggestions" aria-label="Быстрые фильтры">
+      <div class="internships-suggestion-row">
+        <button type="button" class="internships-suggestion" data-chip-filter="design" data-chip-value="Коммуникационный">Коммуникационный дизайн</button>
+        <button type="button" class="internships-suggestion" data-chip-filter="design" data-chip-value="Продуктовый">Продуктовый дизайн</button>
+        <button type="button" class="internships-suggestion" data-chip-filter="company" data-chip-value="Яндекс">Яндекс</button>
       </div>
-    </div>
-    
-    <div class="internships-hero-image">
-      <!-- Замени "home/growy-hero.webp" на картинку мальчика с лупой, если она у тебя есть в assets/images -->
-      <%= image_tag "home/growy-hero.webp", alt: "Мальчик с лупой" %>
+      <div class="internships-suggestion-row">
+        <button type="button" class="internships-suggestion" data-chip-filter="format" data-chip-value="Удалённо">Удалённая работа</button>
+        <button type="button" class="internships-suggestion" data-chip-filter="city" data-chip-value="Москва">Москва</button>
+        <button type="button" class="internships-suggestion internships-suggestion--all" data-reset-all>
+          Все вакансии
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 4v15m-6-6 6 6 6-6" />
+          </svg>
+        </button>
+      </div>
     </div>
   </section>
 
-  <!-- НИЖНЯЯ ЧАСТЬ: Сетка (Фильтры слева, Вакансии справа) -->
-  <div class="internships-layout">
-    
-    <!-- ЛЕВАЯ КОЛОНКА (ФИЛЬТРЫ) -->
-    <aside class="filters-sidebar">
-      <button class="filter-btn">Направление дизайна ↓</button>
-      <div class="filter-row">
-        <button class="filter-btn">Навыки ↓</button>
-        <button class="filter-btn">Формат ↓</button>
-      </div>
-      <div class="filter-row">
-        <button class="filter-btn">Город ↓</button>
-        <button class="filter-btn">Компания ↓</button>
-      </div>
-      <button class="filter-btn">Зарплата ↓</button>
-      
-      <button class="subscribe-search-btn">Подписаться на поиск</button>
-    </aside>
+  
+  <section class="internships-catalog" aria-label="Каталог вакансий">
+    <div class="internships-mobile-toolbar">
+      <button class="internships-mobile-filters-button" type="button" data-open-mobile-filters aria-controls="internships-filters-panel" aria-expanded="false">
+        Фильтры <span class="internships-mobile-filter-count" data-mobile-filter-count hidden></span>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M7 12h10m-7 5h4" /></svg>
+      </button>
+    </div>
 
-    <!-- ПРАВАЯ КОЛОНКА (СПИСОК ВАКАНСИЙ) -->
-    <main class="internships-main">
-      <h2 class="internships-subtitle">Все вакансии</h2>
-      
-      <div class="internships-list">
-        <% @internships.each do |internship| %>
-          <div class="internship-card">
-            <div class="card-header">
-              <div class="card-company">
-                <span class="company-dot"></span>
-                <%= internship.company.name %>
-              </div>
-              
-              <!-- Кнопка Избранного (сердечко) -->
-              <%= form_with url: admin_favorites_path, method: :post, class: "heart-form" do |f| %>
-                <%= f.hidden_field :internship_id, value: internship.id %>
-                <button type="submit" class="heart-btn">
-                  <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 17.5L8.55 16.18C3.4 11.51 0 8.42 0 4.62C0 1.54 2.42 0 5.1 0C6.95 0 8.75 0.86 10 2.24C11.25 0.86 13.05 0 14.9 0C17.58 0 20 1.54 20 4.62C20 8.42 16.6 11.51 11.45 16.18L10 17.5Z" stroke="#2D2D2D" stroke-width="1.5"/>
-                  </svg>
-                </button>
-              <% end %>
+    <div class="internships-mobile-backdrop" data-mobile-backdrop hidden></div>
+
+    <aside class="internships-filters" id="internships-filters-panel" data-filters-panel aria-label="Фильтры вакансий">
+      <div class="internships-filters-mobile-header">
+        <h2>Фильтры</h2>
+        <button type="button" class="internships-icon-button" data-close-mobile-filters aria-label="Закрыть фильтры">&times;</button>
+      </div>
+
+      <div class="internships-filter-list">
+        <% filter_groups.each do |group| %>
+          <div class="internships-filter" data-filter="<%= group[:key] %>">
+            <div class="internships-filter-pill">
+              <button type="button" class="internships-filter-trigger" data-filter-toggle
+                aria-expanded="false" aria-controls="internships-popup-<%= group[:key] %>">
+                <span class="internships-filter-label"><%= group[:label] %></span>
+                <span class="internships-filter-extra" data-filter-extra hidden></span>
+                <svg class="internships-chevron" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 7 6 6 6-6" /></svg>
+              </button>
+              <button type="button" class="internships-filter-clear" data-filter-clear aria-label="Сбросить <%= group[:label].downcase %>" hidden>&times;</button>
             </div>
-            
-            <h3 class="card-title">
-              <%= link_to internship.title, admin_internship_path(internship), class: "card-link" %>
-            </h3>
-            
-            <p class="card-meta">
-              <%= internship.location %> • <%= internship.format %>
-            </p>
+
+            <div id="internships-popup-<%= group[:key] %>" class="internships-filter-popup" data-filter-popup hidden>
+              <label class="internships-filter-search-wrap">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.7" /><path d="m15.5 15.5 5 5" /></svg>
+                <input type="text" class="internships-filter-search" data-filter-search
+                  placeholder="<%= group[:search] %>" aria-label="Поиск: <%= group[:label] %>" autocomplete="off">
+              </label>
+
+              <div class="internships-filter-options" data-filter-options>
+                <% group[:options].each do |option| %>
+                  <label class="internships-filter-option" data-filter-option>
+                    <input type="checkbox" data-filter-checkbox value="<%= option %>">
+                    <span><%= option %></span>
+                  </label>
+                <% end %>
+                <p class="internships-filter-no-match" data-no-options hidden>Ничего не найдено</p>
+              </div>
+
+              <div class="internships-filter-actions">
+                <button type="button" class="internships-filter-reset" data-filter-reset>Сбросить</button>
+                <button type="button" class="internships-filter-apply" data-filter-apply>Показать</button>
+              </div>
+            </div>
           </div>
         <% end %>
       </div>
-    </main>
-    
-  </div>
-</div>
+
+      <button type="button" class="internships-subscribe-button" data-save-search-open>Подписаться на поиск</button>
+      <button type="button" class="internships-mobile-show-button" data-close-mobile-filters>Показать вакансии</button>
+    </aside>
+
+    <div class="internships-results" aria-live="polite" aria-atomic="false">
+      <div class="internships-results-heading">
+        <h2>Все вакансии</h2>
+        <span class="internships-results-count" data-results-count aria-live="polite"></span>
+      </div>
+
+      <div class="internships-cards" data-cards>
+        <% @internships.each do |internship| %>
+          <% company_name = internship.company.name %>
+          <% company_color = { "Авито" => "#9e9e9e", "Яндекс" => "#91d77c" }.fetch(company_name, "#9e9e9e") %>
+          <% internship_format = internship.format == "Офис" ? "В офисе" : internship.format %>
+          <% internship_design = "Продуктовый" %>
+          <% favorite = @favorites_by_internship_id[internship.id] %>
+          <% salary_unspecified = internship.salary.blank? || internship.salary.downcase.include?("не указана") %>
+
+          <article
+            class="internships-card"
+            data-vacancy
+            data-vacancy-id="<%= internship.id %>"
+            data-company="<%= company_name %>"
+            data-title="<%= internship.title %>"
+            data-design="<%= internship_design %>"
+            data-format="<%= internship_format %>"
+            data-city="<%= internship.location %>"
+            data-skills=""
+            data-salary-status="<%= salary_unspecified ? 'not_specified' : 'paid' %>"
+            data-salary-amount=""
+          >
+            <div class="internships-card-top">
+              <div class="internships-card-company">
+                <span
+                  class="internships-company-dot"
+                  style="--company-dot: <%= company_color %>"
+                ></span>
+                <span><%= company_name %></span>
+              </div>
+
+              <% if user_signed_in? %>
+                <% if favorite %>
+                  <%= form_with url: admin_favorite_path(favorite),
+                      method: :delete,
+                      class: "heart-form" do %>
+                    <button type="submit"
+                            class="internships-favorite"
+                            aria-label="Убрать из избранного"
+                            aria-pressed="true">
+                      <svg viewBox="0 0 24 24" width="24" height="24"
+                           fill="none" stroke="currentColor" stroke-width="1.7"
+                           stroke-linecap="round" stroke-linejoin="round"
+                           aria-hidden="true">
+                        <path d="M20.8 8.6c0 4.7-8.8 10.1-8.8 10.1S3.2 13.3 3.2 8.6a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z" />
+                      </svg>
+                    </button>
+                  <% end %>
+                <% else %>
+                  <%= form_with url: admin_favorites_path,
+                      method: :post,
+                      class: "heart-form" do %>
+                    <%= hidden_field_tag :internship_id, internship.id %>
+                    <button type="submit"
+                            class="internships-favorite"
+                            aria-label="Добавить в избранное"
+                            aria-pressed="false">
+                      <svg viewBox="0 0 24 24" width="24" height="24"
+                           fill="none" stroke="currentColor" stroke-width="1.7"
+                           stroke-linecap="round" stroke-linejoin="round"
+                           aria-hidden="true">
+                        <path d="M20.8 8.6c0 4.7-8.8 10.1-8.8 10.1S3.2 13.3 3.2 8.6a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z" />
+                      </svg>
+                    </button>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to new_user_session_path,
+                    class: "internships-favorite",
+                    aria: { label: "Войти, чтобы добавить в избранное" } do %>
+                  <svg viewBox="0 0 24 24" width="24" height="24"
+                       fill="none" stroke="currentColor" stroke-width="1.7"
+                       stroke-linecap="round" stroke-linejoin="round"
+                       aria-hidden="true">
+                    <path d="M20.8 8.6c0 4.7-8.8 10.1-8.8 10.1S3.2 13.3 3.2 8.6a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z" />
+                  </svg>
+                <% end %>
+              <% end %>
+            </div>
+
+            <h3 class="internships-card-title">
+              <%= link_to internship.title,
+                  admin_internship_path(internship),
+                  class: "internships-card-link" %>
+            </h3>
+
+            <p class="internships-card-meta">
+              <%= [internship.location, "#{internship_design} дизайн", internship.format].reject(&:blank?).join(" • ") %>
+            </p>
+          </article>
+        <% end %>
+      </div>
+
+      <div class="internships-empty" data-empty hidden>
+        <h3>Пока ничего не нашлось</h3>
+        <p>Попробуй другой запрос или убери часть фильтров.</p>
+        <button type="button" data-reset-all>Сбросить фильтры</button>
+      </div>
+    </div>
+  </section>
+
+  
+  <dialog class="internships-save-dialog" data-save-dialog aria-labelledby="internships-save-title">
+    <div class="internships-save-dialog-inner">
+      <button type="button" class="internships-save-close" data-save-dialog-close aria-label="Закрыть">&times;</button>
+      <h2 id="internships-save-title">Сохранить поиск</h2>
+      <p>Пока ты можешь сохранить выбранные фильтры в браузере. А совсем скоро появится возможность подписаться на email-уведомления о новых стажировках!</p>
+      <div class="internships-saved-summary" data-search-summary></div>
+      <button type="button" class="internships-save-confirm" data-save-confirm>Сохранить настройки</button>
+      <p class="internships-save-feedback" role="status" data-save-feedback></p>
+    </div>
+  </dialog>
+</main>

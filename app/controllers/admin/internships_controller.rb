@@ -4,7 +4,15 @@ class Admin::InternshipsController < ApplicationController
 
   # GET /internships or /internships.json
   def index
-    @internships = Internship.all
+    @internships = Internship.includes(:company).order(created_at: :desc)
+
+    @favorites_by_internship_id = if user_signed_in?
+      current_user.favorites
+        .where(internship_id: @internships.map(&:id))
+        .index_by(&:internship_id)
+    else
+      {}
+    end
   end
 
   # GET /internships/1 or /internships/1.json

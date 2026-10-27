@@ -1,2 +1,261 @@
-<h1>Pages#about</h1>
-<p>Find me in app/views/pages/about.html.erb</p>
+<main class="growy-about">
+  
+  <section class="growy-about-hero" aria-labelledby="about-title">
+
+    <div class="growy-about-hero-copy">
+      <h1 class="growy-about-hero-title" id="about-title">
+        GROWY — твой путь к первой
+        <br class="about-desktop-break">
+        дизайн-стажировке
+      </h1>
+
+      <p class="growy-about-hero-description">
+        Найти стажировку — это только начало. Growy помогает
+        понять, чего ждать от отбора и как к нему подготовиться,
+        на основе опыта кандидатов, которые уже прошли его
+      </p>
+
+      <%= link_to "Найти стажировку", root_path,
+          class: "growy-about-button" %>
+    </div>
+
+    <div class="growy-about-hero-art">
+      <%= image_tag "about/hero-intern.webp",
+          alt: "Стажёр GROWY с рюкзаком",
+          loading: "eager" %>
+    </div>
+
+  </section>
+  
+  <section class="growy-about-features"
+           aria-labelledby="features-title">
+
+    <p class="growy-about-eyebrow">
+      Что внутри?
+    </p>
+
+    <h2 class="growy-about-section-title" id="features-title">
+      Всё для уверенного старта
+    </h2>
+
+    <div class="growy-about-features-grid">
+
+      
+      <article class="growy-about-feature growy-about-feature--green
+                      growy-about-feature--internships">
+
+        <div class="growy-about-feature-content">
+          <h3 class="growy-about-feature-title">
+            Все стажировки<br>
+            в одном месте
+          </h3>
+
+          <p class="growy-about-feature-description">
+            Актуальные наборы, требования,
+            ссылки на подачу заявки
+          </p>
+        </div>
+
+        <%= image_tag "about/feature-internships.webp",
+            class: "growy-about-feature-image",
+            alt: "",
+            loading: "lazy" %>
+      </article>
+
+
+      <article class="growy-about-feature growy-about-feature--white
+                      growy-about-feature--experience">
+
+        <div class="growy-about-feature-content">
+          <h3 class="growy-about-feature-title">
+            Успешный опыт<br>
+            кандидатов
+          </h3>
+
+          <p class="growy-about-feature-description">
+            Вопросы с собеседований
+            и реальные истории отбора
+            на стажировку
+          </p>
+        </div>
+
+        <%= image_tag "about/feature-experience.webp",
+            class: "growy-about-feature-image",
+            alt: "",
+            loading: "lazy" %>
+      </article>
+
+
+      <article class="growy-about-feature growy-about-feature--white
+                      growy-about-feature--checklists">
+
+        <div class="growy-about-feature-content">
+          <h3 class="growy-about-feature-title">
+            Чек-листы<br>
+            для подготовки
+          </h3>
+
+          <p class="growy-about-feature-description">
+            Что собрать в портфолио,
+            что исправить в резюме,
+            как отвечать на собесе
+          </p>
+        </div>
+
+        <%= image_tag "about/feature-checklists.webp",
+            class: "growy-about-feature-image",
+            alt: "",
+            loading: "lazy" %>
+      </article>
+
+
+      <article class="growy-about-feature growy-about-feature--green
+                      growy-about-feature--notifications">
+
+        <div class="growy-about-feature-content">
+          <h3 class="growy-about-feature-title">
+            Подписка<br>
+            на фильтры
+          </h3>
+
+          <p class="growy-about-feature-description">
+            Уведомления только
+            о тех стажировках,
+            которые тебе подходят
+          </p>
+        </div>
+
+        <%= image_tag "about/feature-notifications.webp",
+            class: "growy-about-feature-image",
+            alt: "",
+            loading: "lazy" %>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section class="growy-about-steps"
+           aria-labelledby="steps-title">
+
+    <p class="growy-about-eyebrow">
+      Как это работает?
+    </p>
+
+    <h2 class="growy-about-section-title" id="steps-title">
+      От поиска до подачи заявки
+    </h2>
+
+    <div class="growy-about-steps-grid">
+
+
+      <article class="growy-about-step growy-about-step--white">
+
+        <%= image_tag "about/step-1.webp",
+            class: "growy-about-step-number",
+            alt: "",
+            loading: "lazy" %>
+
+        <div class="growy-about-step-content">
+          <h3 class="growy-about-step-title">
+            Настрой фильтры
+          </h3>
+
+          <p class="growy-about-step-description">
+            Выбери нужное. Получай
+            только релевантные
+            стажировки
+          </p>
+        </div>
+      </article>
+
+
+
+      <article class="growy-about-step growy-about-step--green">
+
+        <%= image_tag "about/step-2.webp",
+            class: "growy-about-step-number",
+            alt: "",
+            loading: "lazy" %>
+
+        <div class="growy-about-step-content">
+          <h3 class="growy-about-step-title">
+            Изучи опыт
+          </h3>
+
+          <p class="growy-about-step-description">
+            Посмотри, как проходили
+            отбор другие. Узнай,
+            к чему готовиться
+          </p>
+        </div>
+      </article>
+
+
+      <article class="growy-about-step growy-about-step--green">
+
+        <%= image_tag "about/step-3.webp",
+            class: "growy-about-step-number",
+            alt: "",
+            loading: "lazy" %>
+
+        <div class="growy-about-step-content">
+          <h3 class="growy-about-step-title">
+            Подготовься
+          </h3>
+
+          <p class="growy-about-step-description">
+            Используй чек-листы
+            и рекомендации,
+            отточи ответы
+          </p>
+        </div>
+      </article>
+
+
+
+      <article class="growy-about-step growy-about-step--white">
+
+        <%= image_tag "about/step-4.webp",
+            class: "growy-about-step-number",
+            alt: "",
+            loading: "lazy" %>
+
+        <div class="growy-about-step-content">
+          <h3 class="growy-about-step-title">
+            Отправь заявку
+          </h3>
+
+          <p class="growy-about-step-description">
+            Ты знаешь требования
+            и свои сильные стороны.
+            Осталось действовать
+          </p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section class="growy-about-cta"
+           aria-labelledby="about-cta-title">
+
+    <p class="growy-about-eyebrow">
+      Узнай, на что обращают внимание
+    </p>
+
+    <h2 class="growy-about-section-title growy-about-cta-title"
+        id="about-cta-title">
+      Начни готовиться к своей
+      <br class="about-desktop-break">
+      первой дизайн-стажировке с Growy
+    </h2>
+
+    <%= link_to "Присоединиться",
+        root_path(anchor: "subscribe"),
+        class: "growy-about-button growy-about-cta-button" %>
+
+  </section>
+
+</main>

@@ -1,0 +1,206 @@
+.growy-login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 540px;
+  padding: 48px 20px 64px;
+}
+
+.growy-login-page *,
+.growy-login-page *::before,
+.growy-login-page *::after {
+  box-sizing: border-box;
+}
+
+/* КАРТОЧКА */
+
+.growy-login-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 40px 36px;
+
+  background: var(--white);
+  border-radius: 20px;
+
+  color: var(--text);
+}
+
+/* ЗАГОЛОВОК */
+
+.growy-login-title {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5vw, 56px);
+  font-weight: 400;
+  line-height: 1.05;
+
+  text-align: center;
+}
+
+/* ФОРМА */
+
+.growy-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.growy-login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.growy-login-field label {
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+  line-height: var(--line-base);
+}
+
+.growy-login-field input {
+  width: 100%;
+  height: 58px;
+  padding: 0 18px;
+
+  border: 1px solid transparent;
+  border-radius: 12px;
+
+  background: var(--page-bg);
+  color: var(--text);
+
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.growy-login-field input::placeholder {
+  color: #a8a8a8;
+  opacity: 1;
+}
+
+.growy-login-field input:focus {
+  border-color: var(--green);
+  background: #f7fff2;
+}
+
+/* ЗАПОМНИТЬ МЕНЯ */
+
+.growy-login-remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  width: fit-content;
+  cursor: pointer;
+
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text);
+}
+
+.growy-login-remember input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+
+  accent-color: var(--green);
+  cursor: pointer;
+}
+
+/* КНОПКА */
+
+.growy-login-submit {
+  width: 100%;
+  height: 54px;
+  margin-top: 4px;
+  padding: 0 20px;
+
+  border: none;
+  border-radius: 18px;
+
+  background: var(--text);
+  color: var(--white);
+
+  font-family: var(--font-body);
+  font-size: var(--type-base);
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.growy-login-submit:hover {
+  background: #191919;
+}
+
+.growy-login-submit:active {
+  transform: translateY(1px);
+}
+
+.growy-login-submit:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+/* ЗАБЫЛИ ПАРОЛЬ */
+
+.growy-login-forgot {
+  display: block;
+  width: fit-content;
+  margin: 24px auto 0;
+
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+
+  color: var(--muted);
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.growy-login-forgot:hover {
+  color: var(--green);
+}
+
+/* АДАПТИВ */
+
+@media (max-width: 700px) {
+  .growy-login-page {
+    min-height: 0;
+    padding: 48px 0 64px;
+  }
+
+  .growy-login-card {
+    max-width: 440px;
+    padding: 32px 24px;
+    border-radius: 16px;
+  }
+
+  .growy-login-title {
+    font-size: 46px;
+  }
+}
+
+@media (max-width: 360px) {
+  .growy-login-card {
+    padding: 28px 18px;
+  }
+
+  .growy-login-title {
+    font-size: 40px;
+  }
+}

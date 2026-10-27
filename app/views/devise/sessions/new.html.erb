@@ -1,0 +1,78 @@
+<main class="growy-login-page">
+
+  <section class="growy-login-card">
+
+    <h1 class="growy-login-title">
+      Войти в GROWY
+    </h1>
+
+    <%= form_for(resource,
+        as: resource_name,
+        url: session_path(resource_name),
+        html: { class: "growy-login-form" }) do |f| %>
+
+      <!-- EMAIL -->
+
+      <div class="growy-login-field">
+
+        <%= f.label :email, "Почта" %>
+
+        <%= f.email_field :email,
+            autofocus: true,
+            autocomplete: "email",
+            placeholder: "Введите email",
+            required: true %>
+
+      </div>
+
+
+      <!-- ПАРОЛЬ -->
+
+      <div class="growy-login-field">
+
+        <%= f.label :password, "Пароль" %>
+
+        <%= f.password_field :password,
+            autocomplete: "current-password",
+            placeholder: "Введите пароль",
+            required: true %>
+
+      </div>
+
+
+      <!-- ЗАПОМНИТЬ МЕНЯ -->
+
+      <% if devise_mapping.rememberable? %>
+
+        <label class="growy-login-remember">
+
+          <%= f.check_box :remember_me %>
+
+          <span>Запомнить меня</span>
+
+        </label>
+
+      <% end %>
+
+
+      <!-- КНОПКА ВХОДА -->
+
+      <%= f.submit "Войти",
+          class: "growy-login-submit" %>
+
+    <% end %>
+
+
+    <!-- ВОССТАНОВЛЕНИЕ ПАРОЛЯ -->
+
+    <% if devise_mapping.recoverable? %>
+
+      <%= link_to "Забыли пароль?",
+          new_password_path(resource_name),
+          class: "growy-login-forgot" %>
+
+    <% end %>
+
+  </section>
+
+</main>
